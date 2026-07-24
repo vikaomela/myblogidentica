@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#171813" name="theme-color"/>
+<title>Vika Blog Map — стратегическая карта личного бренда</title>
+<meta content="Стратегическая карта блога Вики: позиционирование, смыслы, контентные линии, воронки и визуальная система." name="description"/>
+
+
+
+<style>
+    :root{
+      --ink:#171813;
+      --ink-2:#26281f;
+      --cream:#f2efe6;
+      --paper:#f8f5ed;
+      --olive:#606249;
+      --olive-dark:#383b2b;
+      --lime:#baff3c;
+      --lilac:#c9b7d5;
+      --clay:#a06e5b;
+      --muted:#aaa79c;
+      --line:rgba(23,24,19,.17);
+      --shadow:0 28px 70px rgba(17,18,14,.16);
+      --radius:28px;
+      --serif:"Playfair Display", Georgia, serif;
+      --sans:"DM Sans", "Manrope", system-ui, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--ink)}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .wrap{width:min(1220px,calc(100% - 40px));margin:0 auto}
+    .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.19em;font-weight:700}
+    .serif{font-family:var(--serif);font-style:italic;font-weight:500}
+    .lime-mark{background:linear-gradient(transparent 48%,var(--lime) 48% 89%,transparent 89%);padding:0 .08em}
+    .nav{position:fixed;z-index:100;left:50%;transform:translateX(-50%);top:16px;width:min(1120px,calc(100% - 24px));display:flex;align-items:center;justify-content:space-between;padding:12px 14px 12px 18px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(23,24,19,.83);backdrop-filter:blur(18px);color:white;box-shadow:0 12px 40px rgba(0,0,0,.2)}
+    .brand{font-weight:700;letter-spacing:-.02em}.brand i{font-family:var(--serif);font-weight:500;color:var(--lime)}
+    .navlinks{display:flex;gap:8px;align-items:center}.navlinks a{padding:9px 13px;border-radius:999px;font-size:13px;color:rgba(255,255,255,.72)}.navlinks a:hover{background:rgba(255,255,255,.1);color:white}
+    .nav .cta{background:var(--lime);color:var(--ink);font-weight:700}
+
+    .hero{min-height:100vh;background:var(--ink);color:white;position:relative;overflow:hidden;padding:120px 0 64px}
+    .hero:before{content:"";position:absolute;inset:-15%;background:radial-gradient(circle at 22% 35%,rgba(186,255,60,.12),transparent 27%),radial-gradient(circle at 86% 22%,rgba(201,183,213,.19),transparent 22%),linear-gradient(115deg,transparent 0 46%,rgba(255,255,255,.03) 46% 46.4%,transparent 46.4%);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;position:relative}
+    .hero-copy{padding-top:30px}
+    .hero h1{font-size:clamp(64px,9.5vw,142px);line-height:.83;letter-spacing:-.07em;margin:18px 0 32px;max-width:780px}
+    .hero h1 .map{display:block;font-family:var(--serif);font-style:italic;font-weight:500;color:var(--cream);letter-spacing:-.05em}
+    .hero h1 .blog{display:block;color:var(--lime)}
+    .hero-intro{display:grid;grid-template-columns:120px 1fr;gap:20px;max-width:680px;align-items:start}
+    .hero-intro .index{font-family:var(--serif);font-size:58px;line-height:1;color:var(--lilac)}
+    .hero-intro p{font-size:19px;line-height:1.55;color:rgba(255,255,255,.74);margin:2px 0}
+    .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}.hero-tags span{border:1px solid rgba(255,255,255,.18);padding:8px 12px;border-radius:999px;font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:rgba(255,255,255,.68)}
+    .portrait-shell{position:relative;min-height:670px}
+    .portrait{position:absolute;inset:0 0 0 8%;border-radius:50px 50px 12px 50px;overflow:hidden;box-shadow:var(--shadow);transform:rotate(1.6deg);background:#333}
+    .portrait img{width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:saturate(.83) contrast(1.02)}
+    .portrait:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(13,14,10,.55));pointer-events:none}
+    .float-card{position:absolute;z-index:2;background:var(--paper);color:var(--ink);border:1px solid rgba(255,255,255,.35);box-shadow:0 20px 50px rgba(0,0,0,.25)}
+    .float-card.one{left:-4%;top:10%;width:220px;padding:20px;border-radius:26px;transform:rotate(-4deg)}
+    .float-card.two{right:-4%;bottom:8%;width:270px;padding:18px;border-radius:24px;transform:rotate(4deg);background:var(--lime)}
+    .float-card .tiny{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.55}.float-card strong{display:block;font-size:25px;line-height:1.05;margin-top:12px;letter-spacing:-.04em}.float-card .serif{font-size:23px}
+    .route-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 6px rgba(186,255,60,.16);margin-right:10px}
+    .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.43)}
+
+    section{padding:110px 0;position:relative}
+    .section-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:54px}
+    .section-head h2{font-size:clamp(46px,6vw,86px);line-height:.95;letter-spacing:-.055em;margin:8px 0 0}
+    .section-head p{font-size:18px;line-height:1.55;color:#64635b;margin:0 0 7px;max-width:560px}
+    .section-number{font-family:var(--serif);font-size:30px;color:var(--clay)}
+
+    .core{background:var(--cream)}
+    .map-stage{position:relative;height:720px;border-radius:38px;background:#e8e3d7;border:1px solid var(--line);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+    .map-stage:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(23,24,19,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(23,24,19,.055) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,transparent,black 12%,black 90%,transparent)}
+    #map-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+    #map-lines line{stroke:rgba(23,24,19,.27);stroke-width:1.5;stroke-dasharray:5 7}
+    .node{position:absolute;width:180px;min-height:92px;padding:18px 18px 16px;border-radius:22px;background:rgba(248,245,237,.92);border:1px solid rgba(23,24,19,.13);box-shadow:0 14px 40px rgba(37,38,30,.12);cursor:grab;user-select:none;touch-action:none;transition:box-shadow .2s,transform .2s,border-color .2s}
+    .node:hover{box-shadow:0 20px 48px rgba(37,38,30,.18);border-color:rgba(23,24,19,.27);transform:translateY(-2px)}
+    .node:active{cursor:grabbing}.node.active{outline:3px solid var(--lime);outline-offset:2px}
+    .node .node-kicker{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8b897f}.node strong{font-size:19px;display:block;margin-top:7px;letter-spacing:-.03em}.node small{display:block;color:#77756b;margin-top:5px;line-height:1.35}
+    .node.center{width:230px;min-height:150px;background:var(--ink);color:white;border-radius:34px;z-index:3}.node.center .node-kicker{color:var(--lime)}.node.center strong{font-size:38px}.node.center small{color:rgba(255,255,255,.62)}
+    .node.accent{background:var(--lime)}.node.lilac{background:#ddd0e3}.node.dark{background:var(--olive-dark);color:white}.node.dark small{color:rgba(255,255,255,.62)}
+    .map-detail{position:absolute;right:24px;top:24px;width:330px;padding:24px;border-radius:26px;background:rgba(23,24,19,.93);color:white;box-shadow:var(--shadow);z-index:8;transform:translateX(calc(100% + 40px));transition:transform .35s ease}
+    .map-detail.open{transform:translateX(0)}.map-detail button{position:absolute;right:16px;top:14px;border:0;background:transparent;color:white;font-size:22px;cursor:pointer}.map-detail .label{color:var(--lime);font-size:11px;text-transform:uppercase;letter-spacing:.14em}.map-detail h3{font-size:28px;margin:12px 0}.map-detail p{color:rgba(255,255,255,.7);line-height:1.55}
+    .map-hint{position:absolute;left:22px;bottom:18px;font-size:12px;color:#77756b;background:rgba(248,245,237,.78);padding:8px 12px;border-radius:999px;backdrop-filter:blur(10px)}
+
+    .dna{background:var(--ink);color:white}
+    .dna .section-head p{color:rgba(255,255,255,.58)}
+    .dna-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:100px;gap:14px}
+    .dna-card{border-radius:26px;padding:24px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#22231d}
+    .dna-card h3{margin:0;font-size:28px;letter-spacing:-.04em}.dna-card p{color:rgba(255,255,255,.62);line-height:1.45;max-width:410px}.dna-card .big{font-family:var(--serif);font-style:italic;font-size:65px;line-height:.9;color:var(--lime);position:absolute;right:20px;bottom:4px;opacity:.8}
+    .dna-card.a{grid-column:span 7;grid-row:span 2}.dna-card.b{grid-column:span 5;grid-row:span 2;background:var(--lilac);color:var(--ink)}.dna-card.b p{color:#4a4650}.dna-card.c{grid-column:span 4;grid-row:span 2;background:var(--olive)}.dna-card.d{grid-column:span 4;grid-row:span 2;background:var(--clay)}.dna-card.e{grid-column:span 4;grid-row:span 2;background:var(--cream);color:var(--ink)}.dna-card.e p{color:#5e5b53}
+
+    .engine{background:var(--paper)}
+    .flow{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:18px;align-items:stretch}
+    .flow:before{content:"";position:absolute;left:4%;right:4%;top:38px;height:2px;background:linear-gradient(90deg,var(--lime),var(--lilac),var(--clay));z-index:0}
+    .step{position:relative;z-index:1;padding-top:82px}
+    .step .dot{position:absolute;top:20px;left:18px;width:38px;height:38px;border-radius:50%;background:var(--ink);color:white;display:grid;place-items:center;font-size:12px;font-weight:700;box-shadow:0 0 0 10px var(--paper)}
+    .step-card{height:100%;min-height:250px;border-radius:26px;padding:22px;background:white;border:1px solid var(--line);box-shadow:0 12px 34px rgba(23,24,19,.07)}
+    .step-card h3{margin:0 0 10px;font-size:20px;letter-spacing:-.03em}.step-card p{margin:0;color:#6a685f;line-height:1.48;font-size:14px}.step-card .micro{display:block;margin-top:20px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#97958b}
+
+    .routes{background:#e8e3d7}
+    .route-board{display:grid;grid-template-columns:1.05fr .95fr;gap:22px}
+    .route-list{display:grid;gap:12px}
+    .route-item{padding:22px;border-radius:24px;background:rgba(248,245,237,.82);border:1px solid var(--line);display:grid;grid-template-columns:50px 1fr auto;align-items:center;gap:16px;cursor:pointer;transition:.2s}
+    .route-item:hover,.route-item.active{background:var(--ink);color:white;transform:translateX(6px)}
+    .route-item .num{font-family:var(--serif);font-size:30px;color:var(--clay)}.route-item.active .num,.route-item:hover .num{color:var(--lime)}
+    .route-item strong{font-size:18px}.route-item small{display:block;color:#77756b;margin-top:4px}.route-item.active small,.route-item:hover small{color:rgba(255,255,255,.55)}
+    .route-item .arrow{font-size:24px}
+    .route-preview{position:sticky;top:100px;min-height:590px;border-radius:34px;background:var(--ink);color:white;padding:32px;overflow:hidden;box-shadow:var(--shadow)}
+    .route-preview:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 75% 20%,rgba(186,255,60,.18),transparent 24%),radial-gradient(circle at 15% 85%,rgba(201,183,213,.23),transparent 25%)}
+    .route-preview>*{position:relative}.route-preview h3{font-family:var(--serif);font-style:italic;font-size:54px;line-height:1;margin:20px 0}.route-preview p{color:rgba(255,255,255,.63);line-height:1.55;max-width:520px}
+    .route-path{margin-top:34px;display:grid;gap:14px}.route-path .path-node{display:flex;align-items:center;gap:14px;padding:13px 15px;border:1px solid rgba(255,255,255,.13);border-radius:18px;background:rgba(255,255,255,.04)}.route-path .path-node:before{content:"";width:12px;height:12px;border-radius:50%;background:var(--lime)}
+
+    .funnels{background:var(--paper)}
+    .funnel-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}.funnel-tabs button{border:1px solid var(--line);background:white;padding:11px 16px;border-radius:999px;cursor:pointer}.funnel-tabs button.active{background:var(--ink);color:white;border-color:var(--ink)}
+    .funnel-canvas{position:relative;min-height:520px;border-radius:34px;border:1px solid var(--line);background:white;overflow:hidden;padding:42px}
+    .funnel-canvas:before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,rgba(23,24,19,.11) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(90deg,transparent,black 20%,black 80%,transparent)}
+    .funnel-row{position:relative;z-index:1;display:grid;grid-template-columns:1fr 80px 1fr 80px 1fr 80px 1fr;align-items:center;min-height:370px;gap:6px}
+    .f-card{padding:22px;border-radius:26px;background:var(--cream);border:1px solid var(--line);min-height:180px;display:flex;flex-direction:column;justify-content:space-between}.f-card.final{background:var(--lime)}.f-card.dark{background:var(--ink);color:white}.f-card h3{margin:0;font-size:25px;letter-spacing:-.04em}.f-card p{color:#66645b;line-height:1.45}.f-card.dark p{color:rgba(255,255,255,.57)}.f-arrow{font-size:38px;text-align:center;color:var(--clay)}
+
+    .visual{background:var(--ink);color:white}
+    .visual .section-head p{color:rgba(255,255,255,.58)}
+    .visual-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:26px}
+    .palette-card,.type-card{border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:28px;background:#20211c}
+    .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:25px}.swatch{aspect-ratio:1;border-radius:22px;padding:14px;display:flex;align-items:flex-end;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em}.swatch.dark{color:white}.swatch.lime{background:var(--lime);color:var(--ink)}.swatch.cream{background:var(--cream);color:var(--ink)}.swatch.olive{background:var(--olive)}.swatch.lilac{background:var(--lilac);color:var(--ink)}.swatch.clay{background:var(--clay)}.swatch.ink{background:#11120f}
+    .type-demo{margin-top:20px;border-top:1px solid rgba(255,255,255,.12);padding-top:24px}.type-demo .display{font-family:var(--serif);font-style:italic;font-size:62px;line-height:.95}.type-demo .sans{font-size:45px;font-weight:700;line-height:1;letter-spacing:-.05em;margin-top:20px}.type-demo .small{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.5);margin-top:22px}
+
+    .mockups{background:var(--cream)}
+    .mock-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .mock{aspect-ratio:4/5;border-radius:28px;overflow:hidden;position:relative;box-shadow:var(--shadow);background:#333}.mock img{width:100%;height:100%;object-fit:cover}.mock:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.72))}.mock .cover-copy{position:absolute;z-index:2;left:24px;right:24px;bottom:24px;color:white}.mock .cover-copy .tiny{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--lime)}.mock .cover-copy h3{font-size:37px;line-height:.95;letter-spacing:-.055em;margin:10px 0 0}.mock .cover-copy h3 em{font-family:var(--serif);font-weight:500}.mock .badge{position:absolute;z-index:2;right:16px;top:16px;background:rgba(248,245,237,.9);color:var(--ink);border-radius:999px;padding:8px 11px;font-size:10px;text-transform:uppercase;letter-spacing:.12em}
+    .mock.light:after{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(23,24,19,.64))}
+    .mock .ui-float{position:absolute;z-index:2;left:16px;top:18px;padding:10px 12px;background:rgba(23,24,19,.72);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(12px);border-radius:16px;color:white;font-size:11px}
+
+    .filter{background:var(--paper)}
+    .filter-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:26px;align-items:start}.score-card{position:sticky;top:100px;background:var(--ink);color:white;border-radius:32px;padding:30px;box-shadow:var(--shadow)}.score-ring{width:160px;height:160px;border-radius:50%;display:grid;place-items:center;margin:22px auto;background:conic-gradient(var(--lime) 0deg,rgba(255,255,255,.1) 0);position:relative}.score-ring:after{content:"";position:absolute;inset:14px;border-radius:50%;background:var(--ink)}.score-ring span{position:relative;z-index:1;font-family:var(--serif);font-size:52px}.score-card p{color:rgba(255,255,255,.58);line-height:1.5}.checklist{display:grid;gap:10px}.check{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:18px 20px;border:1px solid var(--line);border-radius:20px;background:white;cursor:pointer;transition:.2s}.check:hover{transform:translateX(4px)}.check input{appearance:none;width:24px;height:24px;border:1.5px solid #aaa79c;border-radius:8px;margin:0;display:grid;place-items:center}.check input:checked{background:var(--lime);border-color:var(--lime)}.check input:checked:after{content:"✓";font-weight:800}.check strong{display:block}.check small{display:block;color:#79776e;margin-top:4px;line-height:1.4}
+
+    footer{background:var(--ink);color:white;padding:70px 0}.footer-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:60px}.footer-title{font-size:clamp(45px,6vw,80px);line-height:.95;letter-spacing:-.05em}.footer-title em{font-family:var(--serif);font-weight:500;color:var(--lime)}.footer-note{color:rgba(255,255,255,.55);line-height:1.6}.footer-mini{margin-top:34px;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.35)}
+
+    @media (max-width:980px){
+      .navlinks a:not(.cta){display:none}.hero-grid,.section-head,.route-board,.visual-grid,.filter-grid,.footer-grid{grid-template-columns:1fr}.hero{padding-top:110px}.portrait-shell{min-height:600px}.float-card.one{left:0}.float-card.two{right:0}.flow{grid-template-columns:repeat(2,1fr)}.flow:before{display:none}.step{padding-top:0}.step .dot{position:static;margin:0 0 10px}.dna-grid{grid-template-columns:1fr;grid-auto-rows:auto}.dna-card.a,.dna-card.b,.dna-card.c,.dna-card.d,.dna-card.e{grid-column:auto;grid-row:auto;min-height:210px}.route-preview{position:relative;top:auto}.funnel-row{grid-template-columns:1fr;gap:12px}.f-arrow{transform:rotate(90deg)}.mock-grid{grid-template-columns:1fr 1fr}.map-stage{height:900px}.map-detail{left:18px;right:18px;bottom:18px;top:auto;width:auto;transform:translateY(calc(100% + 40px))}.map-detail.open{transform:translateY(0)}
+    }
+    @media (max-width:640px){
+      .wrap{width:min(100% - 22px,1220px)}.hero h1{font-size:64px}.hero-intro{grid-template-columns:1fr}.hero-intro .index{display:none}.portrait-shell{min-height:520px}.portrait{inset:0}.float-card.one{width:180px;top:8%}.float-card.two{width:220px}.section-head h2{font-size:48px}.flow{grid-template-columns:1fr}.mock-grid{grid-template-columns:1fr}.swatches{grid-template-columns:repeat(2,1fr)}.map-stage{height:1050px}.node{width:150px}.node.center{width:190px}.funnel-canvas{padding:22px}.visual-grid{gap:14px}.route-item{grid-template-columns:42px 1fr auto}.hero-tags{display:none}
+    }
+    @media print{
+      .nav,.scroll-cue{display:none!important}section,.hero{break-inside:avoid;min-height:auto}.hero{padding-top:50px}.map-stage{height:700px}.route-preview{position:relative;top:auto}body{background:white}
+    }
+  
+    /* Local-safe + mobile interaction fixes */
+    :root{
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+    noscript{display:block;position:fixed;z-index:9999;left:12px;right:12px;bottom:12px;padding:14px 16px;border-radius:16px;background:#baff3c;color:#171813;font:600 14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .node,.route-item{font:inherit;text-align:left;color:inherit;-webkit-tap-highlight-color:transparent}
+    .node:focus-visible,.route-item:focus-visible,.funnel-tabs button:focus-visible,.check:focus-within{outline:3px solid var(--lime);outline-offset:3px}
+    body:not(.interactive-ready) .map-hint:after{content:" • интерактивность запустится в браузере"}
+    body.js-error:before{content:"Предпросмотр заблокировал JavaScript. Откройте страницу в Safari/Chrome или на GitHub Pages.";position:fixed;z-index:9999;left:12px;right:12px;bottom:12px;padding:14px 16px;border-radius:16px;background:#baff3c;color:#171813;font:600 14px/1.4 var(--sans);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    @media (max-width:760px){
+      #map-lines{display:none}
+      .map-stage{height:auto!important;min-height:0!important;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:16px;overflow:visible}
+      .node{position:relative!important;left:auto!important;top:auto!important;width:auto!important;min-height:112px;touch-action:manipulation;cursor:pointer;transform:none!important}
+      .node.center{grid-column:1/-1;width:auto!important;min-height:145px}
+      .map-hint{position:relative!important;left:auto!important;bottom:auto!important;grid-column:1/-1;text-align:center;padding:5px 0 2px}
+      .map-detail{position:fixed!important;left:12px!important;right:12px!important;bottom:12px!important;top:auto!important;width:auto!important;max-height:58vh;overflow:auto;transform:translateY(calc(100% + 30px))!important}
+      .map-detail.open{transform:translateY(0)!important}
+    }
+    @media (max-width:480px){
+      .map-stage{grid-template-columns:1fr}
+      .node.center,.map-hint{grid-column:1}
+    }
+</style>
+</head>
+<body><noscript>Интерактивность отключена в этом предпросмотре. Откройте файл в Safari/Chrome или опубликуйте через GitHub Pages.</noscript>
+<nav class="nav">
+<div class="brand">VIKA / <i>BLOG MAP</i></div>
+<div class="navlinks">
+<a href="#core">Ядро</a><a href="#content">Контент</a><a href="#funnels">Воронки</a><a href="#visual">Визуал</a><a class="cta" href="#filter">Фильтр идей</a>
+</div>
+</nav>
+<header class="hero">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<div class="eyebrow"><span class="route-dot"></span>стратегическая карта личного бренда</div>
+<h1><span class="blog">BLOG</span><span class="map">map.</span></h1>
+<div class="hero-intro"><div class="index">01</div><p>Не «ещё один документ про позиционирование», а рабочее пространство: <span class="lime-mark">кто ты, что показываешь, во что должен верить человек и куда ведёт каждый тип контента.</span></p></div>
+<div class="hero-tags"><span>PPC / Performance</span><span>Meta + Google</span><span>Email</span><span>Shopify</span><span>Personality</span></div>
+</div>
+<div class="portrait-shell">
+<div class="portrait"><img alt="Вика" src="assets/editorial.webp"/></div>
+<div class="float-card one"><span class="tiny">главный принцип</span><strong>Показываю, <span class="serif">как решаю</span> конкретные задачи</strong></div>
+<div class="float-card two"><span class="tiny">впечатление после 10 касаний</span><strong>Сильный эксперт. <span class="serif">Нормальный человек.</span></strong></div>
+</div>
+</div>
+<div class="scroll-cue">scroll to navigate ↓</div>
+</header>
+<section class="core" id="core">
+<div class="wrap">
+<div class="section-head"><div><div class="section-number">01.</div><h2>Ядро <span class="serif">бренда</span></h2></div><p>Перетаскивай карточки. Нажми на узел — откроется его роль в системе. В центре не услуга и не воронка: <b>в центре ты и твой способ решать маркетинговые задачи.</b></p></div>
+<div class="map-stage" id="map-stage">
+<svg id="map-lines"></svg>
+<button aria-label="центр карты Вика PPC / performance-маркетолог, которая думает и показывает решения" class="node center" data-key="core" id="center-node" style="left:42%;top:38%" type="button"><span class="node-kicker">центр карты</span><strong>Вика</strong><small>PPC / performance-маркетолог, которая думает и показывает решения</small></button>
+<button aria-label="канал Meta Ads спрос, креативы, масштабирование" class="node accent" data-key="meta" style="left:9%;top:12%" type="button"><span class="node-kicker">канал</span><strong>Meta Ads</strong><small>спрос, креативы, масштабирование</small></button>
+<button aria-label="новая ассоциация Google Ads горячий спрос и PPC-идентичность" class="node lilac" data-key="google" style="left:40%;top:8%" type="button"><span class="node-kicker">новая ассоциация</span><strong>Google Ads</strong><small>горячий спрос и PPC-идентичность</small></button>
+<button aria-label="retention Email возврат, прогрев, повторные продажи" class="node" data-key="email" style="left:73%;top:16%" type="button"><span class="node-kicker">retention</span><strong>Email</strong><small>возврат, прогрев, повторные продажи</small></button>
+<button aria-label="доказательство Кейсы проблема → решение → результат" class="node dark" data-key="cases" style="left:75%;top:49%" type="button"><span class="node-kicker">доказательство</span><strong>Кейсы</strong><small>проблема → решение → результат</small></button>
+<button aria-label="человек Виковне эп жизнь, характер, лёгкость" class="node" data-key="personality" style="left:61%;top:74%" type="button"><span class="node-kicker">человек</span><strong>Виковне эп</strong><small>жизнь, характер, лёгкость</small></button>
+<button aria-label="сюжетная линия Shopify $40k ограниченная серия, не весь блог" class="node" data-key="shopify" style="left:27%;top:75%" type="button"><span class="node-kicker">сюжетная линия</span><strong>Shopify $40k</strong><small>ограниченная серия, не весь блог</small></button>
+<button aria-label="later ОАЭ локальная линия и отдельная воронка" class="node dark" data-key="uae" style="left:7%;top:57%" type="button"><span class="node-kicker">later</span><strong>ОАЭ</strong><small>локальная линия и отдельная воронка</small></button>
+<button aria-label="логика Аналитика куда смотреть до резких решений" class="node" data-key="analytics" style="left:9%;top:34%" type="button"><span class="node-kicker">логика</span><strong>Аналитика</strong><small>куда смотреть до резких решений</small></button>
+<div class="map-hint">drag nodes • click to open meaning</div>
+<aside class="map-detail" id="map-detail"><button aria-label="Закрыть">×</button><div class="label">meaning node</div><h3></h3><p></p></aside>
+</div>
+</div>
+</section>
+<section class="dna">
+<div class="wrap">
+<div class="section-head"><div><div class="section-number">02.</div><h2>Personality <span class="serif">DNA</span></h2></div><p>Не набор качеств «умная / красивая / успешная», а контрасты, которые делают образ живым и снимают страх работать с сильным экспертом.</p></div>
+<div class="dna-grid">
+<article class="dna-card a"><div class="eyebrow">01 / expertise</div><h3>Умная, но не душная</h3><p>Сложные вещи объясняются через реальные ситуации и решения, а не через лекцию и профессиональный жаргон.</p><div class="big">clear.</div></article>
+<article class="dna-card b"><div class="eyebrow">02 / attitude</div><h3>Сильная, но не сверху</h3><p>Есть позиция и уверенность, но нет образа человека, который пришёл научить собственника жить.</p><div class="big">easy.</div></article>
+<article class="dna-card c"><div class="eyebrow">03 / style</div><h3>Дорого, но живо</h3><p>Современный editorial-визуал без холодной корпоративности.</p></article>
+<article class="dna-card d"><div class="eyebrow">04 / voice</div><h3>Прямо, но без морали</h3><p>Можно сказать «я бы так не делала» и тут же показать, что именно сделала бы.</p></article>
+<article class="dna-card e"><div class="eyebrow">05 / feeling</div><h3>С ней нормально</h3><p>Человек чувствует: ты не создашь лишний цирк, не спрячешься за терминами и объяснишь решение.</p></article>
+</div>
+</div>
+</section>
+<section class="engine" id="content">
+<div class="wrap">
+<div class="section-head"><div><div class="section-number">03.</div><h2>Контент как <span class="serif">маршрут</span></h2></div><p>Каждая единица контента не обязана продавать всё сразу. Она должна провести человека по одному понятному маршруту — от узнавания ситуации к доверию или действию.</p></div>
+<div class="flow">
+<div class="step"><div class="dot">01</div><div class="step-card"><h3>Ситуация</h3><p>Конкретный момент: продажи упали, лиды стали хуже, нужен Google или нет.</p><span class="micro">узнавание</span></div></div>
+<div class="step"><div class="dot">02</div><div class="step-card"><h3>Первый ход</h3><p>Что ты проверишь или что точно не станешь делать в первую очередь.</p><span class="micro">позиция</span></div></div>
+<div class="step"><div class="dot">03</div><div class="step-card"><h3>Разбор</h3><p>Куда смотришь: кабинет, сайт, воронка, спрос, CRM, email.</p><span class="micro">компетентность</span></div></div>
+<div class="step"><div class="dot">04</div><div class="step-card"><h3>Действие</h3><p>Какую связку или последовательность решений собираешь.</p><span class="micro">практика</span></div></div>
+<div class="step"><div class="dot">05</div><div class="step-card"><h3>Доказательство</h3><p>Экран, цифра, схема, письмо, карточка сайта, фрагмент аналитики.</p><span class="micro">trust</span></div></div>
+<div class="step"><div class="dot">06</div><div class="step-card"><h3>Следующий шаг</h3><p>Growth Map, директ, консультация, сохранение или просто подписка.</p><span class="micro">CTA по смыслу</span></div></div>
+</div>
+</div>
+</section>
+<section class="routes">
+<div class="wrap">
+<div class="section-head"><div><div class="section-number">04.</div><h2>Контентные <span class="serif">ветки</span></h2></div><p>Нажимай на линию — справа появится её роль. Это не рубрикатор ради рубрикатора, а разные способы доказывать одну ценность.</p></div>
+<div class="route-board">
+<div class="route-list" id="route-list">
+<button aria-label="01 Что бы я сделала, если… Конкретная задача → твоя логика → набор инструментов ↗" class="route-item active" data-route="situations" type="button"><div class="num">01</div><div><strong>Что бы я сделала, если…</strong><small>Конкретная задача → твоя логика → набор инструментов</small></div><div class="arrow">↗</div></button>
+<button aria-label="02 Кейсы изнутри Не «было/стало», а как именно ты пришла к решению ↗" class="route-item" data-route="cases" type="button"><div class="num">02</div><div><strong>Кейсы изнутри</strong><small>Не «было/стало», а как именно ты пришла к решению</small></div><div class="arrow">↗</div></button>
+<button aria-label="03 Рекламная диагностика Что означает изменение конкретной цифры или этапа ↗" class="route-item" data-route="diagnostics" type="button"><div class="num">03</div><div><strong>Рекламная диагностика</strong><small>Что означает изменение конкретной цифры или этапа</small></div><div class="arrow">↗</div></button>
+<button aria-label="04 Google / PPC Новая ассоциация без сухого учебника ↗" class="route-item" data-route="google" type="button"><div class="num">04</div><div><strong>Google / PPC</strong><small>Новая ассоциация без сухого учебника</small></div><div class="arrow">↗</div></button>
+<button aria-label="05 Shopify $40k Ограниченная сюжетная кампания с выводами ↗" class="route-item" data-route="shopify" type="button"><div class="num">05</div><div><strong>Shopify $40k</strong><small>Ограниченная сюжетная кампания с выводами</small></div><div class="arrow">↗</div></button>
+<button aria-label="06 Виковне эп Жизнь, вкус, юмор, личный контекст ↗" class="route-item" data-route="life" type="button"><div class="num">06</div><div><strong>Виковне эп</strong><small>Жизнь, вкус, юмор, личный контекст</small></div><div class="arrow">↗</div></button>
+<button aria-label="07 ОАЭ — позже Адаптация рабочих форматов под локальный рынок ↗" class="route-item" data-route="uae" type="button"><div class="num">07</div><div><strong>ОАЭ — позже</strong><small>Адаптация рабочих форматов под локальный рынок</small></div><div class="arrow">↗</div></button>
+</div>
+<aside class="route-preview" id="route-preview"><div class="eyebrow">route 01</div><h3>Что бы я сделала, если…</h3><p>Формат показывает не то, сколько терминов ты знаешь, а как принимаешь решения. Он особенно хорошо работает для собственников, которым нужна не лекция, а ощущение: «она уже понимает, что с этим делать».</p><div class="route-path"><div class="path-node">Если продажи резко упали</div><div class="path-node">Куда смотрю в первую очередь</div><div class="path-node">Что меняю и что не трогаю</div><div class="path-node">CTA: написать свою ситуацию</div></div></aside>
+</div>
+</div>
+</section>
+<section class="funnels" id="funnels">
+<div class="wrap">
+<div class="section-head"><div><div class="section-number">05.</div><h2>Не одна <span class="serif">воронка</span></h2></div><p>Блог не превращается в конвейер, где каждый пост насильно ведёт в Growth Map. Маршрут зависит от темы и готовности человека.</p></div>
+<div class="funnel-tabs" id="funnel-tabs"><button class="active" data-funnel="ecom">E-commerce</button><button data-funnel="audit">Рекламная проблема</button><button data-funnel="google">Google / PPC</button><button data-funnel="uae">ОАЭ позже</button></div>
+<div class="funnel-canvas"><div class="funnel-row" id="funnel-row"></div></div>
+</div>
+</section>
+<section class="visual" id="visual">
+<div class="wrap">
+<div class="section-head"><div><div class="section-number">06.</div><h2>Визуальный <span class="serif">код</span></h2></div><p>Не «розовый girly-girl». Основа — editorial, спокойный интеллект, структура и немного digital-энергии. Женственность появляется через типографику, фото и детали, а не через тотальный розовый.</p></div>
+<div class="visual-grid">
+<div class="palette-card"><div class="eyebrow">color system</div><h3>Тёмная база + живой акцент</h3><div class="swatches"><div class="swatch ink dark">ink</div><div class="swatch cream">cream</div><div class="swatch olive dark">olive</div><div class="swatch lime">signal lime</div><div class="swatch lilac">soft lilac</div><div class="swatch clay dark">clay</div></div></div>
+<div class="type-card"><div class="eyebrow">type hierarchy</div><div class="type-demo"><div class="display">editorial <span style="color:var(--lime)">thinking.</span></div><div class="sans">КОНКРЕТНАЯ ЗАДАЧА → ПОНЯТНОЕ РЕШЕНИЕ</div><div class="small">small caps / interface labels / analytical microcopy</div></div></div>
+</div>
+</div>
+</section>
+<section class="mockups">
+<div class="wrap">
+<div class="section-head"><div><div class="section-number">07.</div><h2>Как это может <span class="serif">выглядеть</span></h2></div><p>Текст здесь собран реальным HTML/CSS, поэтому он не «съезжает» и не превращается в кривой генеративный макет. Это направления подачи, а не одинаковый шаблон на всю ленту.</p></div>
+<div class="mock-grid">
+<article class="mock"><img alt="Вика" src="assets/hero.webp"/><div class="ui-float">analytics / decision / action</div><div class="badge">case inside</div><div class="cover-copy"><div class="tiny">Рекламная диагностика</div><h3>Продажи <em>резко</em><br/>упали?</h3></div></article>
+<article class="mock light"><img alt="Вика" src="assets/coffee.webp"/><div class="badge">PPC</div><div class="cover-copy"><div class="tiny">Meta + Google</div><h3>Meta уже <em>мало?</em></h3></div></article>
+<article class="mock"><img alt="Вика" src="assets/paris.webp"/><div class="badge">Виковне эп</div><div class="cover-copy"><div class="tiny">не только Ads</div><h3>Человек до <em>эксперта</em></h3></div></article>
+</div>
+</div>
+</section>
+<section class="filter" id="filter">
+<div class="wrap">
+<div class="section-head"><div><div class="section-number">08.</div><h2>Фильтр <span class="serif">идеи</span></h2></div><p>Отметь пункты. Если идея набирает мало — она либо слишком общая, либо пока не показывает тебя.</p></div>
+<div class="filter-grid">
+<aside class="score-card"><div class="eyebrow">idea quality</div><div class="score-ring" id="score-ring"><span id="score">0</span></div><h3 id="score-title">Пока просто тема</h3><p id="score-text">Добавь конкретную ситуацию, своё действие и визуальное доказательство.</p></aside>
+<div class="checklist" id="checklist">
+<label class="check"><input type="checkbox"/><span><strong>Есть конкретная ситуация</strong><small>Не «про Google», а «когда я бы подключила Google и почему».</small></span></label>
+<label class="check"><input type="checkbox"/><span><strong>Человек узнает себя</strong><small>Фраза звучит как реальная мысль собственника, а не тема урока.</small></span></label>
+<label class="check"><input type="checkbox"/><span><strong>Видно, как ты думаешь</strong><small>Есть твой первый ход, выбор или отказ от очевидного действия.</small></span></label>
+<label class="check"><input type="checkbox"/><span><strong>Есть визуальное доказательство</strong><small>Скрин, схема, кабинет, цепочка, цифра или экран сайта.</small></span></label>
+<label class="check"><input type="checkbox"/><span><strong>Материал усиливает один смысл бренда</strong><small>Экспертность, опыт, понятность, лёгкость или PPC-позиционирование.</small></span></label>
+<label class="check"><input type="checkbox"/><span><strong>CTA логичен именно этой теме</strong><small>Не обязательно продавать: иногда правильнее сохранить, ответить или подписаться.</small></span></label>
+</div>
+</div>
+</div>
+</section>
+<footer><div class="wrap footer-grid"><div class="footer-title">Каждый материал должен оставлять мысль:<br/><em>«мне нравится, как она думает».</em></div><div><p class="footer-note">Эта карта — не догма. Это операционная система, к которой можно возвращаться перед новым контент-планом, запуском серии, лид-магнита или визуальной рубрики.</p><div class="footer-mini">Vika Blog Map / strategic space / 2026</div></div></div></footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const stage = document.getElementById('map-stage');
+    const svg = document.getElementById('map-lines');
+    const nodes = stage ? [...stage.querySelectorAll('.node')] : [];
+    const center = document.getElementById('center-node');
+    const detail = document.getElementById('map-detail');
+    const meanings = {
+      core:['Центр блога','Ты и твой способ решать конкретные маркетинговые задачи. Не Meta, не Shopify и не одна воронка.'],
+      meta:['Meta Ads','Сильная действующая компетенция: спрос через креатив, работа с аудиторией, масштабирование и диагностика качества трафика.'],
+      google:['Google Ads','Новая ассоциация, которую нужно системно закреплять через реальные задачи и связки, а не через объявление «я теперь ещё Google».'],
+      email:['Email-маркетинг','Инструмент возврата и повторных продаж. Показывает, что ты видишь путь клиента дальше первого клика.'],
+      cases:['Кейсы изнутри','Доказательство опыта через проблему, принятые решения, процесс и результат — с реальными экранами и схемами.'],
+      personality:['Виковне эп','Линия, которая делает блог живым: вкус, характер, жизнь, юмор и ощущение человека, с которым легко.'],
+      shopify:['Shopify $40k','Одна сильная контентная кампания. Её раскрывают серией, а затем возвращаются к ней редко.'],
+      uae:['ОАЭ','Позднее — самостоятельный географический слой и отдельная воронка. Сейчас он не должен поглощать весь блог.'],
+      analytics:['Аналитика','Твой способ не дёргаться: сначала понять, на каком этапе изменился результат, а уже потом менять рекламу.']
+    };
+
+    function updateLines(){
+      if(!stage || !svg || !center || window.innerWidth <= 760) return;
+      const s=stage.getBoundingClientRect(), c=center.getBoundingClientRect();
+      const cx=c.left-s.left+c.width/2, cy=c.top-s.top+c.height/2;
+      svg.innerHTML='';
+      nodes.filter(n=>n!==center).forEach(n=>{
+        const r=n.getBoundingClientRect();
+        const x=r.left-s.left+r.width/2,y=r.top-s.top+r.height/2;
+        const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+        line.setAttribute('x1',cx);line.setAttribute('y1',cy);line.setAttribute('x2',x);line.setAttribute('y2',y);
+        svg.appendChild(line);
+      });
+    }
+
+    function openMeaning(node){
+      if(!detail) return;
+      const m=meanings[node.dataset.key];
+      if(!m) return;
+      nodes.forEach(x=>x.classList.remove('active'));
+      node.classList.add('active');
+      detail.querySelector('h3').textContent=m[0];
+      detail.querySelector('p').textContent=m[1];
+      detail.classList.add('open');
+    }
+
+    let drag=null, moved=false;
+    nodes.forEach(n=>{
+      n.addEventListener('pointerdown',e=>{
+        moved=false;
+        if(window.innerWidth<=760) return;
+        drag={n,x:e.clientX,y:e.clientY,l:n.offsetLeft,t:n.offsetTop};
+        if(n.setPointerCapture) n.setPointerCapture(e.pointerId);
+      });
+      n.addEventListener('pointermove',e=>{
+        if(!drag||drag.n!==n) return;
+        if(Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>5) moved=true;
+        const maxX=stage.clientWidth-n.offsetWidth,maxY=stage.clientHeight-n.offsetHeight;
+        n.style.left=Math.max(0,Math.min(maxX,drag.l+e.clientX-drag.x))+'px';
+        n.style.top=Math.max(0,Math.min(maxY,drag.t+e.clientY-drag.y))+'px';
+        updateLines();
+      });
+      n.addEventListener('pointerup',()=>{drag=null});
+      n.addEventListener('pointercancel',()=>{drag=null});
+      n.addEventListener('click',e=>{if(moved){e.preventDefault();moved=false;return}openMeaning(n)});
+    });
+    if(detail){
+      const close=detail.querySelector('button');
+      if(close) close.addEventListener('click',()=>detail.classList.remove('open'));
+    }
+    window.addEventListener('resize',updateLines);
+    requestAnimationFrame(()=>requestAnimationFrame(updateLines));
+
+    const routeData={
+      situations:['route 01','Что бы я сделала, если…','Формат показывает не то, сколько терминов ты знаешь, а как принимаешь решения. Он особенно хорошо работает для собственников, которым нужна не лекция, а ощущение: «она уже понимает, что с этим делать».',['Если продажи резко упали','Куда смотрю в первую очередь','Что меняю и что не трогаю','CTA: написать свою ситуацию']],
+      cases:['route 02','Кейсы изнутри','Главная ценность кейса — не финальная цифра, а прозрачность хода работы. Человек видит проблему, твои решения и понимает, что ты реально работала руками.',['Что было не так','Что увидела в данных','Что изменила','Что получили и что дальше']],
+      diagnostics:['route 03','Рекламная диагностика','Короткие экспертные ситуации помогают показать зрелость: ты не дёргаешь кампанию по одному плохому дню и умеешь отличить проблему трафика от проблемы после клика.',['Симптом','Что могло измениться','Как проверяю гипотезу','Вывод без паники']],
+      google:['route 04','Google / PPC','Google появляется не как ещё один сертификат, а как инструмент в конкретном решении: когда нужен сформированный спрос, поиск, Shopping или связка с Meta.',['Задача бизнеса','Роль Meta','Роль Google','Как распределяю каналы']],
+      shopify:['route 05','Shopify $40k','Ограниченная сюжетная кампания: оборот, закрытие, ошибки, предпринимательская сторона и то, как опыт изменил твою работу с клиентами.',['Конфликт $40k → закрытие','Что не видела тогда','Что сделала бы сейчас','Переход в Growth Map']],
+      life:['route 06','Виковне эп','Не каждый личный кадр нужно связывать с маркетингом. Эта линия создаёт вкус, характер и эмоциональное доверие.',['Жизнь и поездки','Рабочая реальность','Юмор и реакции','Без обязательного CTA']],
+      uae:['route 07','ОАЭ — позже','Отдельная географическая линия, которая получает уже работающие форматы: разборы ситуаций, кейсы, сезонность и локальные бизнес-задачи.',['Локальная ситуация','Решение под рынок','Кейс или разбор','Отдельная UAE-воронка']]
+    };
+    const rp=document.getElementById('route-preview');
+    document.querySelectorAll('.route-item').forEach(item=>item.addEventListener('click',()=>{
+      document.querySelectorAll('.route-item').forEach(x=>x.classList.remove('active'));
+      item.classList.add('active');
+      const d=routeData[item.dataset.route];
+      if(rp && d) rp.innerHTML=`<div class="eyebrow">${d[0]}</div><h3>${d[1]}</h3><p>${d[2]}</p><div class="route-path">${d[3].map(x=>`<div class="path-node">${x}</div>`).join('')}</div>`;
+    }));
+
+    const funnelData={
+      ecom:[['Контент','e-commerce ситуация'],['Growth Map','диагностика магазина'],['Консультация','-50% в течение 24 ч'],['Сотрудничество','консультация бесплатно']],
+      audit:[['Контент','реальная рекламная проблема'],['Директ','описать ситуацию'],['Аудит / созвон','разобрать данные'],['Ведение','если есть fit']],
+      google:[['Google-контент','конкретная задача'],['Доверие','видят новую компетенцию'],['Консультация','Google / связка каналов'],['Запуск','ведение или настройка']],
+      uae:[['Локальный контент','рынок и ситуация'],['UAE lead magnet','отдельный вход'],['Консультация','под локальную задачу'],['Проект','ОАЭ / international']]
+    };
+    const row=document.getElementById('funnel-row');
+    function renderFunnel(key){
+      if(!row || !funnelData[key]) return;
+      row.innerHTML=funnelData[key].map((x,i)=>`${i?'<div class="f-arrow">→</div>':''}<div class="f-card ${i===3?'final':i===1?'dark':''}"><div class="eyebrow">0${i+1}</div><div><h3>${x[0]}</h3><p>${x[1]}</p></div></div>`).join('');
+    }
+    renderFunnel('ecom');
+    document.querySelectorAll('#funnel-tabs button').forEach(b=>b.addEventListener('click',()=>{
+      document.querySelectorAll('#funnel-tabs button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      renderFunnel(b.dataset.funnel);
+    }));
+
+    const checks=[...document.querySelectorAll('#checklist input')];
+    const score=document.getElementById('score'),ring=document.getElementById('score-ring'),title=document.getElementById('score-title'),text=document.getElementById('score-text');
+    function updateScore(){
+      const n=checks.filter(x=>x.checked).length,p=checks.length?Math.round(n/checks.length*100):0;
+      if(score) score.textContent=p;
+      if(ring) ring.style.background=`conic-gradient(var(--lime) ${p*3.6}deg,rgba(255,255,255,.1) 0)`;
+      if(!title||!text) return;
+      if(p<35){title.textContent='Пока просто тема';text.textContent='Добавь конкретную ситуацию, своё действие и визуальное доказательство.'}
+      else if(p<70){title.textContent='Уже можно развивать';text.textContent='Основа есть. Усиль узнавание боли и выбери один логичный следующий шаг.'}
+      else{title.textContent='Сильная идея';text.textContent='Материал показывает тебя, попадает в ситуацию и имеет понятный маршрут.'}
+    }
+    checks.forEach(x=>x.addEventListener('change',updateScore));
+    updateScore();
+
+    document.body.classList.add('interactive-ready');
+    window.__VIKA_MAP_READY__=true;
+  } catch(error){
+    console.error('Vika Blog Map init error:', error);
+    document.body.classList.add('js-error');
+  }
+});
+</script>
+</body>
+</html>
